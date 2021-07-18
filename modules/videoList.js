@@ -1,132 +1,110 @@
-//Las listas
-const videoList = [{
-        titulo: 'Titulo 1',
-        artista: 'Artista 1',
-        id: 1
-    },
-    {
-        titulo: 'Titulo 2',
-        artista: 'Artista 2',
-        id: 2
-    },
+import { videoList, boxVideoList, boxPlayList } from "./variables.js";
 
-    {
-        titulo: 'Titulo 3',
-        artista: 'Artista 3',
-        id: 3
-    }
-]
-
-export const contentVideoList = document.querySelector('#video-list')
-export const contentPlayList = document.querySelector('#play-list')
-
-let playList = []
 let videoListEdit = [...videoList]
+let playList = []
+
+
+export const videoInit = () => {
+
+    //Print to Inicial List
+    boxList(videoList, boxVideoList)
+
+    //Listeners
+    readToListener(boxVideoList, addToListVideo)
+
+    readToListener(boxPlayList, addToListVideo)
+
+
+}
+
+//Load Events Listeners
+const readToListener = (box, fn) => {
+
+    box.addEventListener('click', fn)
+
+}
+
+
+//Print to Videolist
+const boxList = (arr, inner) => {
+
+    arr.map(video => {
+        const row = document.createElement('div')
+        row.classList.add('mt-8')
+        row.innerHTML += `
+        <p class="id"> Id: ${video.id}</p>
+        <p class="titulo"> titulo: ${video.titulo}</p>  `
+
+        inner.getAttribute('id') === 'video-list' ?
+            row.innerHTML += `<a href= "#" class= "add-list" data-id="${video.id}"> Añadir </a>` : null
+
+        inner.getAttribute('id') === 'play-list' ?
+            row.innerHTML += `<a href= "#" class= "remove-list" data-id="${video.id}"> Eliminar </a>` : null
 
 
 
-//Pintamos las listas -> Esto a UI
-export const boxVideoList = () => videoListEdit.map(video => {
-    const { artista, titulo, id } = video
-    const div = document.createElement('div')
-    div.classList.add('box-video')
-    div.innerHTML += `
-    <h3 class="my-4"> ${titulo}</h3>
-    <h5 class="my-4">${artista}</h5>
-    <a href="#" class="my-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded add-list" data-id="${id}">Añadir</a>
-    `
-    contentVideoList.appendChild(div)
-    
-})
+        inner.appendChild(row)
+    })
 
 
-
-const boxPlayList = () => playList.map(video => {
-    const { artista, titulo, id } = video
-    const div = document.createElement('div')
-    div.classList.add('box-video')
-    div.innerHTML += `
-    <h3 class="my-4"> ${titulo}</h3>
-    <h5 class="my-4">${artista}</h5>
-    <a href="#" class="my-4 bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded remove-list" data-id="${id}">Eliminar</a>
-    `
-    contentPlayList.appendChild(div)
-})
-
-
-
-//Limpiamos las listas
-const cleanList = (content) => {
-    while (content.firstChild) {
-        content.removeChild(content.firstChild)
-    }
 }
 
 
 
-//Funciones que necesiatmos
-export function readToPlayList(e) {
-    
+//Clean to List Function
+const cleanToList = box => {
+    while (box.firstChild) {
+        box.removeChild(box.firstChild)
+    }
+}
+
+
+//AddToListVideo
+function addToListVideo(e) {
     e.preventDefault()
-    
-    //Capturamos el id
+
     const video = e.target.parentElement
 
-    
-    addDataVideo(video)
-    
-    //Limpiamos la playList
-    cleanList(contentPlayList)
-    cleanList(contentVideoList)
-    
-    //Imprimimos las Listas
-    boxVideoList()
-    boxPlayList()
-    
-    
+    editToListVideo(video)
+
 }
 
-
-
-
-function addDataVideo(video) {
-
+function editToListVideo(video, typeList) {
 
     const itemVideo = {
-        titulo: video.querySelector('h3').textContent,
-        artista: video.querySelector('h5').textContent,
-        id: video.querySelector('a').getAttribute('data-id')
+        id: video.querySelector('a').getAttribute('data-id'),
+        titulo: video.querySelector('.titulo').textContent
     }
-    
-    
-    console.log('llega la playlist...', playList)
 
-    if (video.childNodes[5].classList.contains('add-list')) {
+    if (video.querySelector('a').classList.contains('add-list')) {
 
+        //Delete videoListEdit
+        videoListEdit = videoListEdit.filter(video => video.id !== itemVideo.id)
 
-        videoListEdit = videoListEdit.filter(video => video.id !== parseInt(itemVideo.id))
+        //Add to Play List
         playList = [...playList, itemVideo]
-
-
-
-
-     
-        
     }
-    
-    if (video.childNodes[5].classList.contains('remove-list')) {
 
-       
+    if (video.querySelector('a').classList.contains('remove-list')) {
+
+        //Delete playList
         playList = playList.filter(video => video.id !== itemVideo.id)
-        console.log(videoListEdit)
+
+        //Add to Video List and order
         videoListEdit = [...videoListEdit, itemVideo]
-        console.log(videoListEdit)
-        
+        videoListEdit = videoListEdit.sort(function(a, b) {
+            return a.id - b.id
+        })
+
+
     }
 
+    //Clean to HTML List    
+    cleanToList(boxVideoList)
+    cleanToList(boxPlayList)
+
+    //Paint to HTML List Again
+    boxList(videoListEdit, boxVideoList)
+    boxList(playList, boxPlayList)
 
 }
-
-
-
-

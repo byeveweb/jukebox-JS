@@ -7,37 +7,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="style.css">
-<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
 
 <title>Document</title>
 </head>
 
 <body>
     <div class="container">
-        <div class="video-list">
+        <!-- load api -->
+        <section>
+            <button type="button" id="cargarJSON">Cargar JSON</button>
+        </section>
+        <!-- Search Form Video List-->
+        <section>
+            <!-- Form Video List-->
+            <div class="div-search">
+                <form id="search-video">
+                    <label> Búsqueda de música:</label>
+                    <input type="text" name="searchvideoname" placeholder="buscar" id="videoname">
+                    <input type="submit" value="Buscar">
+                </form>
+            </div>
 
-            <div class="lg:flex lg:items-center lg:justify-between my-4">
-                <div class="flex-1 min-w-0">
-                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-                        Video List
-                    </h2>
+            <!-- List Name Search-->
+            <div id="search-word-list" class="search-word">
+
+            </div>
+
+            <!-- Clean buttom Search-->
+            <div>
+                <a href="#" id="clean-list" hidden>Load Original List</a>
+            </div>
+        </section>
+        <!-- End Search Form Video List-->
+
+        <section>
+            <div class="div-list">
+
+                <div class="video-list">
+                    <div class="lg:flex lg:items-center lg:justify-between my-4">
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+                                Video List
+                            </h2>
+                        </div>
+                    </div>
+                    <div id="video-list" class="video-list-content"></div>
+                </div>
+
+                <div class="play-list">
+                    <div class="lg:flex lg:items-center lg:justify-between my-4">
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+                                Play List
+                            </h2>
+                        </div>
+                    </div>
+                    <div id="play-list" class="play-list-content">
+                        <div class="no-result">
+
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="video-list"></div>
-        </div>
-
-        <div class="play-list">
-            <div class="lg:flex lg:items-center lg:justify-between my-4">
-                <div class="flex-1 min-w-0">
-                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-                        Play List
-                    </h2>
-                </div>
-            </div>
-            <div id="play-list">
-
-            </div>
-        </div>
+        </section>
     </div>
     <script src="app.js" type="module"></script>
 </body>
