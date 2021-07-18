@@ -1,0 +1,18 @@
+.container {
+    margin: 0 auto;
+    padding: 4rem;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}
+
+.video-list,
+.play-list {
+    flex: 0 1 40%;
+}
+
+.box-video {
+    margin: .5rem;
+    padding: .5rem;
+    border: 1px dotted black;
+}
