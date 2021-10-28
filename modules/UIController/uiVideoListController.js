@@ -6,16 +6,18 @@ export const UIboxList = (arr, box) => {
         const row = document.createElement('div')
         row.classList.add('mt-8')
         row.innerHTML += `
-        <p class="id"> Id: ${video.videos}</p>
-        <p class="titulo"> ${video.titulo}</p>
-        <p class="artista">${video.artista}</p>`
+        <p class="id"> Id: ${video.id}</p>
+        <p class="titulo"> ${video.title}</p>
+        <p class="artista">${video.artist}</p>
+        <img class="art" width="100" height="100" src=${video.art} />
+        <audio class="url" src="${video.url}"></audio>
+        `
 
         box.classList.contains('video-list-content') ?
             row.innerHTML += `<a href="#" class="add-list" data-id ="${video.id}"> Añadir </a>` : null
 
         box.classList.contains('play-list-content') ?
             row.innerHTML += `<a href="#" class="remove-list" data-id ="${video.id}"> Eliminar </a>` : null
-
 
         box.appendChild(row)
     })

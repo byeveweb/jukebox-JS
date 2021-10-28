@@ -1,23 +1,24 @@
-export const videoList = [
+export const videoList = [{
+    id:'00',
+    title: 'Mother\'s Day',
+    artist: 'Offspring Fling',
+    url: 'http://abarcarodriguez.com/365/files/offspring.mp3',
+    art: 'http://abarcarodriguez.com/365/files/offspring.jpg'
+},
 
     {
-        id: '1',
-        titulo: 'titulo 1 esta frase',
-        artista: 'loba'
-    },
+        id:'01',
+    title: 'Blackout City',
+    artist: 'Anamanaguchi',
+    url: 'http://abarcarodriguez.com/365/files/anamanaguchi.mp3',
+    art: 'http://abarcarodriguez.com/365/files/anamanaguchi.jpg'
+},
+
     {
-        id: '2',
-        titulo: 'titulo 2 otro globa',
-        artista: 'loba'
-    },
-    {
-        id: '3',
-        titulo: 'titulo 3 esta frase',
-        artista: 'toro'
-    },
-    {
-        id: '4',
-        titulo: 'titulo 1 lo que más quieras',
-        artista: 'gato'
-    },
+        id:'02',
+    title: 'The Primordial Booze',
+    artist: 'Rainbowdragoneyes',
+    url: 'http://abarcarodriguez.com/365/files/rainbow.mp3',
+    art: 'http://abarcarodriguez.com/365/files/rainbow.jpg'
+}
 ]

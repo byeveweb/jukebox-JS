@@ -31,15 +31,15 @@ const searchVideoItem = (e) => {
     if (boxVideoList.hasAttribute('data-search')) {
 
         //Search in list Search Mode
-        searchVideoOne = searchVideoOne.filter(video => video.titulo.includes(videoname) || video.artista.includes(videoname))
-        searchVideoTwo = searchVideoTwo.filter(video => video.titulo.includes(videoname) || video.artista.includes(videoname))
+        searchVideoOne = searchVideoOne.filter(video => video.titulo.includes(videoname) || video.artist.includes(videoname))
+        searchVideoTwo = searchVideoTwo.filter(video => video.titulo.includes(videoname) || video.artist.includes(videoname))
 
 
     } else {
 
         //Create array with the search word
-        searchVideoOne = videoListEdit.filter(video => video.titulo.includes(videoname) || video.artista.includes(videoname))
-        searchVideoTwo = playList.filter(video => video.titulo.includes(videoname) || video.artista.includes(videoname))
+        searchVideoOne = videoListEdit.filter(video => video.titulo.includes(videoname) || video.artist.includes(videoname))
+        searchVideoTwo = playList.filter(video => video.titulo.includes(videoname) || video.artist.includes(videoname))
 
     }
 

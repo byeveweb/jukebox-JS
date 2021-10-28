@@ -3,6 +3,7 @@ import { videoList } from "./../db.js"
 import { UIboxList } from './../UIController/uiVideoListController.js'
 import { readToListener, cleanAndPrintBox, emplyBoxList } from './../helpers.js'
 import { editToListSearchVideo } from "./searchVideoListController.js";
+import { playerInit } from './../playerController/playerController.js'
 
 export let videoListEdit = [...videoList]
 export let playList = []
@@ -53,6 +54,11 @@ export function putList(video, item) {
         //Add to Play List
         playList = [...playList, item]
 
+        //Load to player
+        playerInit() // Controller Player
+
+        console.log('añadimos a la play')
+
     }
 
     if (video.querySelector('a').classList.contains('remove-list')) {
@@ -75,11 +81,16 @@ export function putList(video, item) {
 //This function call to event click in List Mode
 function editToListVideo(video) {
 
+
+
     const itemVideo = {
         id: video.querySelector('a').getAttribute('data-id'),
-        titulo: video.querySelector('.titulo').textContent,
-        artista: video.querySelector('.artista').textContent
+        title: video.querySelector('.titulo').textContent,
+        artist: video.querySelector('.artista').textContent,
+        art: video.querySelector('.art').currentSrc,
+        url: video.querySelector('.url').currentSrc
     }
+
 
     //The video item selected put in the list 
     putList(video, itemVideo)
